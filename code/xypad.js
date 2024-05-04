@@ -32,7 +32,9 @@ var mouseIsDown = 0;
 var mouseDownPos = [0, 0];
 
 // colors
-var xycolor = [1., 0.71, 0.2, 1.];
+var orange = [1., 0.71, 0.2, 1.]
+var grey = [0.5, 0.5, 0.5, 1.]
+var xycolor = orange;
 var focuscolor = [1, 1, 1, 0.16];
 
 
@@ -64,13 +66,13 @@ function setPos(x, y, focus){
 
 // Takes input azimuth-degrees and calculates corresponding position on screen
 function setAzimuth(deg){
-	azimuth = degtorad(deg)
+	azimuth = degtorad(deg);
 
-	x = Math.sin(azimuth)
-	y = Math.cos(azimuth)
+	x = Math.sin(azimuth);
+	y = Math.cos(azimuth);
 
-	x = elevation * x
-	y = elevation * y
+	x = elevation * x;
+	y = elevation * y;
 
 	xVal = worldtoscreen(x, y)[0];
 	yVal = worldtoscreen(x, y)[1];
@@ -82,37 +84,36 @@ function setAzimuth(deg){
 // Takes input elevation-degrees and calculates corresponding position on screen
 function setElevation(deg){
 
-	rad = degtorad(deg)
-	elevation = Math.cos(rad)
+	rad = degtorad(deg);
+	elevation = Math.cos(rad);
 
-	x = Math.sin(azimuth)
-	y = Math.cos(azimuth)
+	x = Math.sin(azimuth);
+	y = Math.cos(azimuth);
 
-	x = elevation * x
-	y = elevation * y
+	x = elevation * x;
+	y = elevation * y;
 
 	xVal = worldtoscreen(x, y)[0];
 	yVal = worldtoscreen(x, y)[1];
 
-	xySize = 3 * Math.sin(rad) + 16
+	xySize = 3 * Math.sin(rad) + 16;
 
 	mgraphics.redraw();
 }
 
 // Takes input width (stereo spread)-degrees and displays them using an additional ellipse
 function setWidth(deg){
-	rad = degtorad(deg)
+	rad = degtorad(deg);
 
 	focusSize = 180 * Math.sin(0.5 * rad)
 
 	mgraphics.redraw();
 }
 
-
-// change xy color
-function setcolor(r, g, b, a){
-    xycolor = [r, g, b, a];
-    mgraphics.redraw();
+// Changes colour of the ellipse to reflect enabled / disabled encoder
+function setEnable(bool){
+	xycolor = (bool) ? orange : grey;
+	mgraphics.redraw();
 }
 
 
